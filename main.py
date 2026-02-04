@@ -1,9 +1,10 @@
 import os
 from dotenv import load_dotenv
-from agents import manager, researcher, writer
 
+# Load .env FIRST, before importing agents
 load_dotenv()
-# OpenAI client in agents.py will pick up OPENAI_API_KEY from environment
+
+from agents import manager, researcher, writer
 
 def run_workflow():
     user_query = input("Enter a question for the multi-agent system: ")
@@ -12,7 +13,6 @@ def run_workflow():
     tasks_text = manager(user_query)
     print(tasks_text)
 
-    # For simplicity, treat manager output as one block and send to researcher
     print("\n[RESEARCHER] Working on tasks...")
     research_notes = researcher(tasks_text)
     print(research_notes)
